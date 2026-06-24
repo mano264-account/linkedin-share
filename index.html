@@ -6,58 +6,66 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 25px;
-  background: #f5f7fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  background: #f3f6f8;
+  padding: 20px;
+  margin: 0;
 }
 
-.container {
+.card {
   background: white;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  max-width: 450px;
   margin: auto;
 }
 
 h2 {
-  color: #0a66c2;
+  color: #0A66C2;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
 }
 
 textarea {
   width: 100%;
-  height: 140px;
-  margin-top: 10px;
-  border-radius: 8px;
-  padding: 10px;
+  height: 260px;
+  border-radius: 10px;
+  padding: 12px;
   font-size: 14px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 14px;
+  margin-top: 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
 }
 
-.copy-btn {
-  background: #0a66c2;
+.copy {
+  background: #0A66C2;
   color: white;
 }
 
-.open-btn {
-  background: #2e7d32;
+.open {
+  background: #057642;
   color: white;
 }
 
 .status {
-  margin-top: 10px;
-  color: green;
+  margin-top: 12px;
   font-size: 14px;
+  text-align: center;
+  color: green;
 }
 </style>
 
@@ -65,64 +73,96 @@ button {
 
 <body>
 
-<div class="container">
-  <h2>🚀 Share your Experience</h2>
-  <p>Preparing your LinkedIn post...</p>
+<div class="card">
 
-  <textarea id="postText">
-I recently visited the TechForum stall at our office and explored RPA-driven end-to-end automation. It was impressive to see journal entry processing with validations, SAP postings, and automated result sharing with minimal human intervention. Kudos to the team! #Worldline #RPA #Automation #DigitalTransformation #Innovation #SAP #FinanceAutomation
-  </textarea>
+<h2>🚀 Share your Experience</h2>
+<p>Your LinkedIn post is getting ready...</p>
 
-  <button class="copy-btn" onclick="copyText()">✅ Copy Post</button>
-  <button class="open-btn" onclick="openLinkedIn()">🚀 Open LinkedIn & Post</button>
+<textarea id="postText">
+🚀 TechForum Experience – Exploring Intelligent Automation
 
-  <div id="status" class="status"></div>
+I recently had the opportunity to visit the TechForum stall at our office premises and gained valuable insights into modern RPA-driven end-to-end automation capabilities.
+
+✅ Key Highlights:
+
+🤖 RPA Bot in Action  
+✔️ Fully automated journal entry creation  
+✔️ Multiple pre-validations ensuring data accuracy  
+✔️ Seamless SAP postings without manual intervention  
+
+⚙️ End-to-End Process Flow  
+➡️ Input request received  
+➡️ Validation checks executed  
+➡️ SAP transaction processed  
+➡️ Results extracted automatically  
+➡️ Output shared directly to the requester  
+
+🧠 Smart Automation Benefits  
+✔️ Minimal to zero human intervention  
+✔️ Faster turnaround time  
+✔️ Reduced errors and improved accuracy  
+✔️ Scalable and reliable workflows  
+
+📊 Impact on Finance Operations  
+🔹 Streamlined journal processing  
+🔹 Better compliance and accuracy  
+🔹 Real-time result delivery  
+
+👏 Kudos to the team for showcasing such impactful solutions and driving innovation forward!
+
+#Worldline #RPA #Automation #DigitalTransformation #Innovation #SAP #FinanceAutomation #AI #FutureOfWork
+</textarea>
+
+<button class="copy" onclick="copyText()">✅ Copy Post</button>
+<button class="open" onclick="openLinkedIn()">🔗 Open LinkedIn & Post</button>
+
+<div id="status" class="status"></div>
+
 </div>
 
 <script>
 const text = document.getElementById("postText").value;
 const status = document.getElementById("status");
 
-// ✅ Auto copy on load
-window.onload = async function() {
+// ✅ Auto copy
+window.onload = async function () {
   try {
     await navigator.clipboard.writeText(text);
     status.innerHTML = "✅ Post copied! Opening LinkedIn...";
-    
+
     setTimeout(() => {
       openLinkedIn();
     }, 800);
 
-  } catch (err) {
-    status.innerHTML = "⚠️ Tap 'Copy Post' if not copied automatically";
+  } catch (e) {
+    status.innerHTML = "⚠️ Tap 'Copy Post' if auto-copy fails";
   }
 };
 
-// ✅ Manual copy fallback
+// ✅ Manual copy
 function copyText() {
-  var copyText = document.getElementById("postText");
-  copyText.select();
+  const area = document.getElementById("postText");
+  area.select();
   document.execCommand("copy");
-  status.innerHTML = "✅ Copied! Now opening LinkedIn...";
+
+  status.innerHTML = "✅ Copied! Opening LinkedIn...";
 
   setTimeout(() => {
     openLinkedIn();
   }, 500);
 }
 
-// ✅ BEST WORKING METHOD (same as your reference QR)
-
+// ✅ Best possible LinkedIn open logic
 function openLinkedIn() {
 
-  // ✅ Step 1: Try opening LinkedIn mobile app
+  // Try opening LinkedIn app
   window.location.href = "linkedin://feed";
 
-  // ✅ Step 2: Fallback to web composer
+  // Fallback to browser composer
   setTimeout(function () {
     window.location.href = "https://www.linkedin.com/feed/?shareActive=true";
-  }, 1000);
+  }, 1200);
 }
-
 </script>
 
 </body>
