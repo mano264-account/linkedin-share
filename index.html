@@ -2,62 +2,117 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copy & Post on LinkedIn</title>
+<title>Share on LinkedIn</title>
 
 <style>
-body { font-family: Arial; text-align: center; padding: 20px; }
-button { padding: 12px 20px; margin: 10px; font-size: 16px; }
-textarea { width: 100%; height: 150px; }
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 25px;
+  background: #f5f7fa;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+h2 {
+  color: #0a66c2;
+}
+
+textarea {
+  width: 100%;
+  height: 140px;
+  margin-top: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.copy-btn {
+  background: #0a66c2;
+  color: white;
+}
+
+.open-btn {
+  background: #2e7d32;
+  color: white;
+}
+
+.status {
+  margin-top: 10px;
+  color: green;
+  font-size: 14px;
+}
 </style>
 
 </head>
+
 <body>
 
-<h2>Preparing your post... 🚀</h2>
-<p>If not copied automatically, tap below 👇</p>
+<div class="container">
+  <h2>🚀 Share your Experience</h2>
+  <p>Preparing your LinkedIn post...</p>
 
-<textarea id="postText">
+  <textarea id="postText">
 I recently visited the TechForum stall at our office and explored RPA-driven end-to-end automation. It was impressive to see journal entry processing with validations, SAP postings, and automated result sharing with minimal human intervention. Kudos to the team! #Worldline #RPA #Automation #DigitalTransformation #Innovation #SAP #FinanceAutomation
-</textarea>
+  </textarea>
 
-<br>
+  <button class="copy-btn" onclick="copyText()">✅ Copy Post</button>
+  <button class="open-btn" onclick="openLinkedIn()">🔗 Open LinkedIn</button>
 
-<button onclick="copyText()">Copy Post</button>
-<button onclick="openLinkedIn()">Open LinkedIn & Post</button>
+  <div id="status" class="status"></div>
+</div>
 
 <script>
 const text = document.getElementById("postText").value;
+const status = document.getElementById("status");
 
-// ✅ Auto-copy attempt on load
+// ✅ Auto copy on load
 window.onload = async function() {
   try {
     await navigator.clipboard.writeText(text);
-    alert("✅ Post copied! LinkedIn will open next.");
-    openLinkedIn(); // auto open after copy
+    status.innerHTML = "✅ Post copied! Opening LinkedIn...";
+    
+    setTimeout(() => {
+      openLinkedIn();
+    }, 800);
+
   } catch (err) {
-    console.log("Auto-copy blocked");
+    status.innerHTML = "⚠️ Tap 'Copy Post' if not copied automatically";
   }
 };
 
-// ✅ Manual fallback copy
+// ✅ Manual copy fallback
 function copyText() {
   var copyText = document.getElementById("postText");
   copyText.select();
   document.execCommand("copy");
-  alert("✅ Copied! Now opening LinkedIn...");
-  openLinkedIn();
+  status.innerHTML = "✅ Copied! Now opening LinkedIn...";
+
+  setTimeout(() => {
+    openLinkedIn();
+  }, 500);
 }
 
-// ✅ Deep link + fallback to open LinkedIn post composer
+// ✅ BEST WORKING METHOD (same as your reference QR)
 function openLinkedIn() {
-
-  // Try opening LinkedIn mobile app (deep link)
-  window.location.href = "linkedin://shareArticle";
-
-  // Fallback for browsers / if app is not installed
-  setTimeout(function() {
-    window.open("https://www.linkedin.com/feed/?shareActive=true", "_blank");
-  }, 1200);
+  window.location.href = "https://www.linkedin.com/feed/?shareActive=true";
 }
 </script>
 
