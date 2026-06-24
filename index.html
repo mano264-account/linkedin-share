@@ -111,9 +111,18 @@ function copyText() {
 }
 
 // ✅ BEST WORKING METHOD (same as your reference QR)
+
 function openLinkedIn() {
-  window.location.href = "https://www.linkedin.com/feed";
+
+  // ✅ Step 1: Try opening LinkedIn mobile app
+  window.location.href = "linkedin://feed";
+
+  // ✅ Step 2: Fallback to web composer
+  setTimeout(function () {
+    window.location.href = "https://www.linkedin.com/feed/?shareActive=true";
+  }, 1000);
 }
+
 </script>
 
 </body>
