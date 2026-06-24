@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copy & Post on LinkedIn</title>
+
+<style>
+body { font-family: Arial; text-align: center; padding: 20px; }
+button { padding: 12px 20px; margin: 10px; font-size: 16px; }
+textarea { width: 100%; height: 150px; }
+</style>
+
+</head>
+<body>
+
+<h2>Preparing your post... 🚀</h2>
+<p>If not copied automatically, tap below 👇</p>
+
+<textarea id="postText">
+I recently visited the TechForum stall at our office and explored RPA-driven end-to-end automation. It was impressive to see journal entry processing with validations, SAP postings, and automated result sharing with minimal human intervention. Kudos to the team! #Worldline #RPA #Automation #DigitalTransformation #Innovation #SAP #FinanceAutomation
+</textarea>
+
+<br>
+
+<button onclick="copyText()">Copy Post</button>
+<button onclick="openLinkedIn()">Open LinkedIn</button>
+
+<script>
+const text = document.getElementById("postText").value;
+
+// Auto-copy attempt on load
+window.onload = async function() {
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("✅ Post copied! Now open LinkedIn and paste.");
+  } catch (err) {
+    console.log("Auto-copy blocked");
+  }
+};
+
+// Manual fallback
+function copyText() {
+  var copyText = document.getElementById("postText");
+  copyText.select();
+  document.execCommand("copy");
+  alert("✅ Copied! Now paste in LinkedIn.");
+}
+
+function openLinkedIn() {
+  window.location.href = "https://www.linkedin.com/feed/";
+}
+</script>
+
+</body>
+</html>
